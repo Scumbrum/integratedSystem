@@ -1,6 +1,7 @@
 from csv import reader
 from datetime import datetime
 from domain.aggregated_data import AggregatedData
+from domain.agent_data import AgentData
 from domain.accelerometer import Accelerometer
 from domain.parking import Parking
 from domain.gps import Gps
@@ -25,10 +26,13 @@ class FileDatasource:
             self.parking_index = 1
 
         return AggregatedData(
-            Accelerometer(accelerometer_row[0], accelerometer_row[1], accelerometer_row[2]),
-            Gps(gps_row[0], gps_row[1]),
-            Parking(parking_row[0], Gps(parking_row[1], parking_row[2])),
-            datetime.now()
+            road_state='asda',
+            agent_data=AgentData(
+                accelerometer=Accelerometer(accelerometer_row[0], accelerometer_row[1], accelerometer_row[2]),
+                gps=Gps(gps_row[0], gps_row[1]),
+                timestamp=datetime.now(),
+                user_id=12
+                )
         )
     def startReading(self, *args, **kwargs):
         self.accelerometer_file = open(self.accelerometer_filename, 'r', newline='')

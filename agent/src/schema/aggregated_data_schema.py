@@ -4,8 +4,12 @@ from schema.gps_schema import GpsSchema
 from schema.parking_schema import ParkingSchema
 from domain.aggregated_data import AggregatedData
 
-class AggregatedDataSchema(Schema):
+class AgentDataSchema(Schema):
+    user_id = fields.Int()
     accelerometer = fields.Nested(AccelerometerSchema)
     gps = fields.Nested(GpsSchema)
-    parking = fields.Nested(ParkingSchema)
-    time = fields.DateTime('iso')
+    timestamp = fields.DateTime('iso')
+
+class AggregatedDataSchema(Schema):
+    road_state = fields.Str()
+    agent_data = fields.Nested(AgentDataSchema)
