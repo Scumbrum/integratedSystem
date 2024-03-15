@@ -32,7 +32,7 @@ class StoreApiAdapter(StoreGateway):
             json_list.append({
                 "road_state": item.road_state,
                 "agent_data": {
-                    "user_id": item.agent_data.user_id,
+                    "user_id": 12,
                     "timestamp": item.agent_data.timestamp.isoformat(),
                     "accelerometer": {
                         "x": item.agent_data.accelerometer.x,

@@ -11,7 +11,7 @@ class FileDatasource:
         self.accelerometer_filename = accelerometer_filename
         self.gps_filename = gps_filename
         self.parking_filename= parking_filename
-    def read(self) -> AggregatedData:
+    def read(self) -> AgentData:
         accelerometer_row = self.accelerometer_data[self.accelerometer_index]
         self.accelerometer_index += 1
         if self.accelerometer_index == len(self.accelerometer_data):
@@ -25,15 +25,13 @@ class FileDatasource:
         if self.parking_index == len(self.parking_data):
             self.parking_index = 1
 
-        return AggregatedData(
-            road_state='asda',
-            agent_data=AgentData(
+        return AgentData(
                 accelerometer=Accelerometer(accelerometer_row[0], accelerometer_row[1], accelerometer_row[2]),
                 gps=Gps(gps_row[0], gps_row[1]),
                 timestamp=datetime.now(),
                 user_id=12
-                )
-        )
+            )
+        
     def startReading(self, *args, **kwargs):
         self.accelerometer_file = open(self.accelerometer_filename, 'r', newline='')
         preData = reader(self.accelerometer_file);

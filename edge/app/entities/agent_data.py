@@ -19,7 +19,7 @@ class AgentData(BaseModel):
     timestamp: datetime
 
     @classmethod
-    @field_validator('timestamp', mode='before')
+    @field_validator("timestamp", mode="before")
     def parse_timestamp(cls, value):
         # Convert the timestamp to a datetime object
         if isinstance(value, datetime):
